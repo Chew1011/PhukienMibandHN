@@ -1,17 +1,12 @@
 function openShopee(url) {
-  // Để giải quyết vấn đề của bạn, chúng ta sẽ ưu tiên dùng Deep-link.
-  // Nếu link đã là deep-link (qua dịch vụ như Urlgeni), nó sẽ tự động mở app.
+  if (url === "#") {
+    alert("Sản phẩm này đang được cập nhật link!");
+    return;
+  }
 
-  // Thêm hiệu ứng feedback khi click
-  console.log("Đang điều hướng tới Shopee...");
+  // Hiệu ứng phản hồi khi người dùng nhấn
+  console.log("Đang kích hoạt mở App Shopee...");
 
-  // Mở liên kết trong một tab mới
-  window.open(url, "_blank");
+  // Mở link Deep-link trong cửa sổ hiện tại để kích hoạt app tốt hơn trên mobile
+  window.location.href = url;
 }
-
-// Hiệu ứng hover nhẹ nhàng bằng JS nếu cần thêm logic
-document.querySelectorAll(".product-card").forEach((card) => {
-  card.addEventListener("mouseenter", () => {
-    // Có thể thêm haptic feedback ở đây cho mobile
-  });
-});
