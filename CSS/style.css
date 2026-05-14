@@ -16,7 +16,7 @@
 body {
   background-color: var(--bg-color);
   padding-bottom: 50px;
-  overflow-x: hidden; /* Đảm bảo trang không bị trượt ngang */
+  overflow-x: hidden;
 }
 
 .header {
@@ -29,14 +29,14 @@ body {
   margin-bottom: 30px;
 }
 
-/* Sửa lỗi LOGO không fit */
+/* Fix Logo fit khung tròn */
 .logo-circle {
-  width: 80px;
-  height: 80px;
+  width: 85px;
+  height: 85px;
   background: white;
   border-radius: 50%;
   margin: 0 auto 15px;
-  overflow: hidden; /* Cắt phần thừa của logo */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +47,7 @@ body {
 .logo-circle img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fit logo vào khung tròn */
+  object-fit: cover;
 }
 
 .container {
@@ -56,54 +56,76 @@ body {
   padding: 0 15px;
 }
 
-/* Sửa lỗi thẻ sản phẩm bị tràn ảnh */
+/* Tự động đánh số thứ tự */
+.product-grid {
+  counter-reset: shop-counter;
+}
+
 .product-card {
   background: var(--card-bg);
-  border-radius: 15px;
+  border-radius: 20px;
   margin-bottom: 15px;
-  display: flex; /* Sắp xếp ảnh và chữ theo hàng ngang */
+  display: flex;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  overflow: hidden; /* QUAN TRỌNG: Ngăn ảnh sản phẩm tràn ra ngoài thẻ */
+  overflow: hidden;
+  position: relative;
   box-shadow: var(--shadow);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Hiệu ứng nhấn (Animation) */
 .product-card:active {
-  transform: scale(0.98);
+  transform: scale(0.94);
+  background-color: #f0f0f0;
 }
 
-/* Giới hạn khung hình ảnh sản phẩm */
+/* Thiết kế số thứ tự mờ phía sau */
+.product-card::after {
+  counter-increment: shop-counter;
+  content: counter(shop-counter);
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rgba(255, 87, 34, 0.2); /* Số thứ tự mờ nghệ thuật */
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* Hình ảnh sản phẩm to hơn (120px) */
 .product-img {
-  width: 100px;
-  height: 100px;
-  flex-shrink: 0; /* Không cho khung ảnh bị co lại */
-  padding: 10px;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  padding: 12px;
 }
 
 .product-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Giữ ảnh sản phẩm cân đối trong khung vuông */
-  border-radius: 10px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .product-info {
-  padding: 10px 15px;
+  padding: 15px 20px 15px 5px;
   flex-grow: 1;
 }
 
 .product-info h3 {
-  font-size: 0.95rem;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  margin-bottom: 8px;
   color: var(--text-dark);
+  line-height: 1.3;
 }
 
 .btn-buy {
   font-size: 0.75rem;
   color: var(--primary-color);
   font-weight: 800;
-  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .footer {
